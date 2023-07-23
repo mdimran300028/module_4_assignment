@@ -5,36 +5,36 @@ const slides = [
     id:1,
     title:'Slide One',
     description:'Slide One description',
-    iconUrl:'../src/assets/images/icon-1.png',
-    imageUrl:'../src/assets/images/business-1.jpg',
+    imageUrl:'../src/assets/images/bird-1.jpg',
   },
   {
     id:2,
     title:'Slide Two',
     description:'Slide Two description',
-    iconUrl:'../src/assets/images/icon-2.png',
-    imageUrl:'../src/assets/images/business-2.jpg',
+    imageUrl:'../src/assets/images/bird-2.jpg',
   },
   {
     id:3,
     title:'Slide Three',
     description:'Slide Three description',
-    iconUrl:'../src/assets/images/icon-3.png',
-    imageUrl:'../src/assets/images/business-3.jpg',
+    imageUrl:'../src/assets/images/bird-3.jpg',
   },
   {
     id:4,
     title:'Slide Four',
     description:'Slide Four description',
-    iconUrl:'../src/assets/images/icon-4.png',
-    imageUrl:'../src/assets/images/business-4.jpg',
+    imageUrl:'../src/assets/images/bird-4.jpg',
   },
   {
     id:5,
     title:'Slide Five',
     description:'Slide Five description',
-    iconUrl:'../src/assets/images/icon-5.png',
-    imageUrl:'../src/assets/images/business-5.jpg',
+    imageUrl:'../src/assets/images/bird-5.jpg',
+  },{
+    id:6,
+    title:'Slide Six',
+    description:'Slide Six description',
+    imageUrl:'../src/assets/images/bird-6.jpg',
   },
 ]
 
@@ -67,6 +67,10 @@ function prevImage(){
   }
 }
 
+setInterval(()=>{
+  nextImage()
+},4000)
+
 </script>
 
 <template>
@@ -77,7 +81,7 @@ function prevImage(){
           <h1 class="fw-bold">Image Carousel Module-4 Assignment</h1>
         </div>
         <div class="col-lg-9" style="position: relative">
-          <img :src="slide.imgUrl" id="show" class="img-fluid" alt="">
+          <img :src="slide.imgUrl" id="show" class="img-fluid slide-height slide-animation" alt="">
           <div class="dot-wrapper">
             <span class="dot" v-for="(mySlide,key) in slides" :class="slide.imgUrl==mySlide.imageUrl ? 'active-dot':''" :key="key" @click="changeImage(key)"></span>
           </div>
@@ -88,10 +92,10 @@ function prevImage(){
           </div>
 
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 d-md-block d-sm-none">
           <div class="row slide-info">
             <template v-for="(mySlide,key) in slides" :key="key">
-              <div class="col-lg-3 pe-lg-0" @click="changeImage(key)"><img class="img-fluid p-1" :src="mySlide.imageUrl" alt="Icon"></div>
+              <div class="col-lg-4 col-md-2 p-1" :class="slide.imgUrl==mySlide.imageUrl ? 'active-thumbnail':''" @click="changeImage(key)"><img class="img-fluid p-1" :src="mySlide.imageUrl" alt="Icon"></div>
             </template>
 
 <!--            <div class="col-10">-->
@@ -129,5 +133,25 @@ function prevImage(){
   position: absolute;
   right: 25px;
   bottom: 15px;
+}
+.slide-height{
+  width: 100%;
+  height: auto;
+}
+.active-thumbnail{
+  border: 2px solid #888888;
+  box-sizing: border-box;
+}
+.slide-animation{
+  animation-name: animation;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes animation {
+  0% {opacity: 0.2;}
+  20% {opacity: 1.0;}
+  80% {opacity: 1.0;}
+  100% {opacity: 0.2;}
 }
 </style>
